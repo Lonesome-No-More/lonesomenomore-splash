@@ -1,10 +1,10 @@
-import {Composition} from 'remotion';
+import {Composition, registerRoot} from 'remotion';
 import {Video} from './Video';
 
 const FPS = 30;
 const DURATION_SECONDS = 100;
 
-export const RemotionRoot: React.FC = () => {
+const RemotionRoot: React.FC = () => {
   return (
     <Composition
       id="Video"
@@ -16,3 +16,5 @@ export const RemotionRoot: React.FC = () => {
     />
   );
 };
+
+registerRoot(RemotionRoot);
