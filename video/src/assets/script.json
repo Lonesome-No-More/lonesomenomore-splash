@@ -1,0 +1,62 @@
+{
+  "narrator_voice": "Rachel",
+  "sophie_voice": "Sophie",
+  "segments": [
+    {
+      "id": "act1-narration",
+      "scene": "problem",
+      "voice": "narrator",
+      "text": "Millions of seniors spend their days in silence. No visitors. No calls. Just the quiet. And for their families... there's the worry. The guilt of not being there enough. The wish that someone — anyone — could just check in.",
+      "start_seconds": 0
+    },
+    {
+      "id": "act2-narration-1",
+      "scene": "solution",
+      "voice": "narrator",
+      "text": "That's why we built Lonesome No More. A companion who calls your loved one by name... who remembers their stories... and who's always just a phone call away.",
+      "start_seconds": 25
+    },
+    {
+      "id": "act2-sophie",
+      "scene": "solution",
+      "voice": "sophie",
+      "text": "Good morning, Maggie! Did Emma ever get the hang of that bicycle?",
+      "start_seconds": 40
+    },
+    {
+      "id": "act2-narration-2",
+      "scene": "solution",
+      "voice": "narrator",
+      "text": "No apps. No tablets. No learning curve. Just pick up the phone.",
+      "start_seconds": 46
+    },
+    {
+      "id": "act3-narration-1",
+      "scene": "experience",
+      "voice": "narrator",
+      "text": "Sophie remembers everything — the grandkids' names, the Chopin pieces, even the legendary dumplings. Every conversation picks up right where the last one left off.",
+      "start_seconds": 55
+    },
+    {
+      "id": "act3-sophie",
+      "scene": "experience",
+      "voice": "sophie",
+      "text": "You mentioned you were trying that new mystery novel. How's the detective — still one step behind?",
+      "start_seconds": 68
+    },
+    {
+      "id": "act3-narration-2",
+      "scene": "experience",
+      "voice": "narrator",
+      "text": "Available twenty-four seven. Your loved one is never alone.",
+      "start_seconds": 76
+    },
+    {
+      "id": "act4-narration",
+      "scene": "peaceofmind",
+      "voice": "narrator",
+      "text": "And for you? A weekly summary of how they're doing. The stories they shared. The moments that mattered. Lonesome No More — companionship for your loved ones. Peace of mind for you.",
+      "start_seconds": 85
+    }
+  ]
+}
