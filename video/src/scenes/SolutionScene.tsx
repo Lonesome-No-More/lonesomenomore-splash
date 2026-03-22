@@ -10,7 +10,8 @@ import {
 } from 'remotion';
 import {FloatingOrbs} from '../components/FloatingOrbs';
 import {PhoneRing} from '../components/PhoneRing';
-import {ChatBubble} from '../components/ChatBubble';
+import {ConversationThread} from '../components/ConversationThread';
+import {VoiceWaveform} from '../components/VoiceWaveform';
 import {theme} from '../styles/theme';
 import {loadFont} from '@remotion/google-fonts/Merriweather';
 import {loadFont as loadInter} from '@remotion/google-fonts/Inter';
@@ -30,28 +31,25 @@ export const SolutionScene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
-  const logoScale = spring({frame, fps, config: {damping: 12, stiffness: 100}});
-  const phoneEnterFrame = 6 * FPS;
-  const sophieBubbleFrame = 10 * FPS;
-  const taglineFrame = 18 * FPS;
-  const taglineOpacity = interpolate(frame, [taglineFrame, taglineFrame + 12], [0, 1], {
+  // Phase 1: Logo + tagline (0-4s)
+  const logoScale = spring({frame, fps, config: {damping: 14, stiffness: 120}});
+  const logoOut = interpolate(frame, [3.5 * FPS, 4 * FPS], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const titleOpacity = interpolate(frame, [phoneEnterFrame - 10, phoneEnterFrame], [1, 0], {
+  // Phase 2: Phone ring + "Sophie is calling" (4-7s)
+  const phoneIn = interpolate(frame, [3.5 * FPS, 4 * FPS], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  const phoneOut = interpolate(frame, [6.5 * FPS, 7 * FPS], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const phoneOpacity = interpolate(
-    frame,
-    [sophieBubbleFrame - 10, sophieBubbleFrame],
-    [1, 0],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}
-  );
-
-  const chatOpacity = interpolate(frame, [taglineFrame - 10, taglineFrame], [1, 0], {
+  // Phase 3: Conversation thread with waveform (7-15s)
+  const chatIn = interpolate(frame, [6.5 * FPS, 7 * FPS], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
@@ -60,6 +58,7 @@ export const SolutionScene: React.FC = () => {
     <AbsoluteFill style={{backgroundColor: theme.colors.bgWarm}}>
       <FloatingOrbs orbs={ORBS} />
 
+      {/* Phase 1: Logo */}
       <div
         style={{
           position: 'absolute',
@@ -68,16 +67,16 @@ export const SolutionScene: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 24,
-          opacity: titleOpacity,
+          gap: 16,
+          opacity: logoOut,
           transform: `scale(${logoScale})`,
         }}
       >
-        <Img src={staticFile('logo.png')} style={{width: 200}} />
+        <Img src={staticFile('logo.png')} style={{width: 160}} />
         <h1
           style={{
             fontFamily: theme.fonts.heading,
-            fontSize: 52,
+            fontSize: 48,
             color: theme.colors.primary,
             textAlign: 'center',
             margin: 0,
@@ -85,19 +84,28 @@ export const SolutionScene: React.FC = () => {
         >
           Lonesome No More
         </h1>
+        <div
+          style={{
+            width: 60,
+            height: 3,
+            backgroundColor: theme.colors.secondary,
+            borderRadius: 2,
+          }}
+        />
         <p
           style={{
             fontFamily: theme.fonts.body,
-            fontSize: 26,
+            fontSize: 22,
             color: theme.colors.text,
-            opacity: 0.7,
+            opacity: 0.6,
             margin: 0,
           }}
         >
-          A companion who calls your loved one by name
+          A companion who's always just a phone call away
         </p>
       </div>
 
+      {/* Phase 2: Phone ringing */}
       <div
         style={{
           position: 'absolute',
@@ -105,31 +113,13 @@ export const SolutionScene: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          opacity: phoneOpacity,
+          opacity: Math.min(phoneIn, phoneOut),
         }}
       >
-        <PhoneRing startFrame={phoneEnterFrame} />
+        <PhoneRing startFrame={4 * FPS} />
       </div>
 
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '0 200px',
-          opacity: chatOpacity,
-        }}
-      >
-        <ChatBubble
-          speaker="sophie"
-          text="Good morning, Maggie! Did Emma ever get the hang of that bicycle?"
-          enterFrame={sophieBubbleFrame}
-          avatarSrc={staticFile('sophie.jpg')}
-        />
-      </div>
-
+      {/* Phase 3: Conversation with waveform */}
       <div
         style={{
           position: 'absolute',
@@ -138,31 +128,61 @@ export const SolutionScene: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          opacity: taglineOpacity,
-          gap: 16,
+          gap: 20,
+          opacity: chatIn,
         }}
       >
-        <h2
+        {/* Active call header */}
+        <div
           style={{
-            fontFamily: theme.fonts.heading,
-            fontSize: 48,
-            color: theme.colors.text,
-            textAlign: 'center',
-            margin: 0,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 16,
+            background: 'rgba(95,122,97,0.06)',
+            borderRadius: 12,
+            padding: '10px 24px',
+            marginBottom: 8,
           }}
         >
-          No apps. No tablets. No learning curve.
-        </h2>
-        <p
-          style={{
-            fontFamily: theme.fonts.heading,
-            fontSize: 36,
-            color: theme.colors.secondary,
-            margin: 0,
-          }}
-        >
-          Just pick up the phone.
-        </p>
+          <div
+            style={{
+              width: 10,
+              height: 10,
+              borderRadius: '50%',
+              backgroundColor: '#4CAF50',
+              boxShadow: '0 0 6px rgba(76,175,80,0.4)',
+            }}
+          />
+          <span
+            style={{
+              fontFamily: theme.fonts.body,
+              fontSize: 15,
+              color: theme.colors.primary,
+              fontWeight: 600,
+              letterSpacing: 1,
+              textTransform: 'uppercase',
+            }}
+          >
+            Live Call
+          </span>
+          <VoiceWaveform
+            startFrame={7.5 * FPS}
+            durationFrames={8 * FPS}
+            color={theme.colors.primary}
+            barCount={20}
+            width={120}
+            height={24}
+          />
+        </div>
+
+        <ConversationThread
+          avatarSrc={staticFile('sophie.jpg')}
+          messages={[
+            {speaker: 'sophie', text: 'Good morning, Maggie! Did Emma ever learn to ride that bicycle?', delay: 7.5 * FPS},
+            {speaker: 'maggie', text: 'She did! Rode all the way down the driveway yesterday!', delay: 10 * FPS},
+            {speaker: 'sophie', text: 'Oh, that\'s wonderful! I bet you were so proud watching her.', delay: 12.5 * FPS},
+          ]}
+        />
       </div>
     </AbsoluteFill>
   );

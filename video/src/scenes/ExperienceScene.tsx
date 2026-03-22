@@ -1,8 +1,17 @@
 import React from 'react';
-import {AbsoluteFill, useCurrentFrame, interpolate, staticFile} from 'remotion';
+import {
+  AbsoluteFill,
+  useCurrentFrame,
+  interpolate,
+  spring,
+  useVideoConfig,
+  staticFile,
+} from 'remotion';
 import {FloatingOrbs} from '../components/FloatingOrbs';
 import {GlassCard} from '../components/GlassCard';
-import {ChatBubble} from '../components/ChatBubble';
+import {ConversationThread} from '../components/ConversationThread';
+import {VoiceWaveform} from '../components/VoiceWaveform';
+import {TypewriterText} from '../components/TypewriterText';
 import {theme} from '../styles/theme';
 import {loadFont} from '@remotion/google-fonts/Merriweather';
 import {loadFont as loadInter} from '@remotion/google-fonts/Inter';
@@ -19,44 +28,42 @@ const ORBS = [
 ];
 
 const FEATURES = [
-  {
-    title: 'Truly Personalized',
-    description: 'Remembers their life story, interests, and family',
-    icon: '💛',
-    enterFrame: 1 * FPS,
-  },
-  {
-    title: 'Available 24/7',
-    description: 'Call anytime, on any phone, from anywhere',
-    icon: '📞',
-    enterFrame: 3 * FPS,
-  },
-  {
-    title: 'Effortlessly Simple',
-    description: 'No apps, no tablets — just a phone call',
-    icon: '✨',
-    enterFrame: 5 * FPS,
-  },
+  {title: 'Truly Personalized', desc: 'Remembers their life story', icon: '💛', enterFrame: 0.5 * FPS},
+  {title: 'Available 24/7', desc: 'Any phone, anytime', icon: '📞', enterFrame: 1.5 * FPS},
+  {title: 'No Tech Required', desc: 'Just pick up the phone', icon: '✨', enterFrame: 2.5 * FPS},
+];
+
+// Memory items Sophie recalls — shows personalization
+const MEMORIES = [
+  '4 grandchildren',
+  'Loves mystery novels',
+  'Famous dumpling recipe',
+  'Retired librarian',
+  'Favorite: Earl Grey tea',
 ];
 
 export const ExperienceScene: React.FC = () => {
   const frame = useCurrentFrame();
+  const {fps} = useVideoConfig();
 
-  const cardsOpacity = interpolate(frame, [10 * FPS, 11 * FPS], [1, 0], {
+  // Phase 1: Feature cards (0-6s)
+  const cardsOpacity = interpolate(frame, [5.5 * FPS, 6 * FPS], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const sophieBubbleFrame = 10 * FPS;
-  const chatOpacity = interpolate(
-    frame,
-    [sophieBubbleFrame, sophieBubbleFrame + 10, 20 * FPS, 21 * FPS],
-    [0, 1, 1, 0],
-    {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}
-  );
+  // Phase 2: Split screen — memory sidebar + conversation (6-16s)
+  const splitIn = interpolate(frame, [5.5 * FPS, 6 * FPS], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
 
-  const closingFrame = 21 * FPS;
-  const closingOpacity = interpolate(frame, [closingFrame, closingFrame + 12], [0, 1], {
+  // Phase 3: "No apps" closing (16-18s)
+  const closingIn = interpolate(frame, [15.5 * FPS, 16 * FPS], [0, 1], {
+    extrapolateLeft: 'clamp',
+    extrapolateRight: 'clamp',
+  });
+  const splitOut = interpolate(frame, [15.5 * FPS, 16 * FPS], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
@@ -65,6 +72,7 @@ export const ExperienceScene: React.FC = () => {
     <AbsoluteFill style={{backgroundColor: theme.colors.bgSoft}}>
       <FloatingOrbs orbs={ORBS} />
 
+      {/* Phase 1: Feature cards */}
       <div
         style={{
           position: 'absolute',
@@ -72,8 +80,8 @@ export const ExperienceScene: React.FC = () => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          gap: 32,
-          padding: '0 120px',
+          gap: 28,
+          padding: '0 100px',
           opacity: cardsOpacity,
         }}
       >
@@ -81,21 +89,21 @@ export const ExperienceScene: React.FC = () => {
           <GlassCard
             key={i}
             enterFrame={feature.enterFrame}
-            width={420}
+            width={380}
             style={{
-              background: 'rgba(255,255,255,0.85)',
-              border: '1px solid rgba(95,122,97,0.15)',
+              background: 'rgba(255,255,255,0.88)',
+              border: '1px solid rgba(95,122,97,0.12)',
               textAlign: 'center',
-              padding: 32,
+              padding: 28,
             }}
           >
-            <div style={{fontSize: 48, marginBottom: 16}}>{feature.icon}</div>
+            <div style={{fontSize: 40, marginBottom: 10}}>{feature.icon}</div>
             <h3
               style={{
                 fontFamily: theme.fonts.heading,
-                fontSize: 28,
+                fontSize: 24,
                 color: theme.colors.primary,
-                margin: '0 0 8px',
+                margin: '0 0 6px',
               }}
             >
               {feature.title}
@@ -103,38 +111,195 @@ export const ExperienceScene: React.FC = () => {
             <p
               style={{
                 fontFamily: theme.fonts.body,
-                fontSize: 20,
+                fontSize: 17,
                 color: theme.colors.text,
-                opacity: 0.8,
+                opacity: 0.7,
                 margin: 0,
-                lineHeight: 1.5,
               }}
             >
-              {feature.description}
+              {feature.desc}
             </p>
           </GlassCard>
         ))}
       </div>
 
+      {/* Phase 2: Split screen — memory panel + second conversation */}
       <div
         style={{
           position: 'absolute',
           inset: 0,
           display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          padding: '0 200px',
-          opacity: chatOpacity,
+          alignItems: 'stretch',
+          opacity: Math.min(splitIn, splitOut),
         }}
       >
-        <ChatBubble
-          speaker="sophie"
-          text="You mentioned you were trying that new mystery novel. How's the detective — still one step behind?"
-          enterFrame={sophieBubbleFrame}
-          avatarSrc={staticFile('sophie.jpg')}
-        />
+        {/* Left: Memory sidebar */}
+        <div
+          style={{
+            width: 380,
+            background: 'rgba(95,122,97,0.04)',
+            borderRight: '1px solid rgba(95,122,97,0.1)',
+            padding: '60px 32px',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 12,
+          }}
+        >
+          <div
+            style={{
+              fontFamily: theme.fonts.body,
+              fontSize: 12,
+              textTransform: 'uppercase',
+              letterSpacing: 2,
+              color: theme.colors.primary,
+              marginBottom: 8,
+              fontWeight: 600,
+            }}
+          >
+            Maggie's Profile
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              marginBottom: 16,
+            }}
+          >
+            <div
+              style={{
+                width: 48,
+                height: 48,
+                borderRadius: '50%',
+                background: `linear-gradient(135deg, ${theme.colors.secondary}, ${theme.colors.accent})`,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 22,
+                color: 'white',
+                fontFamily: theme.fonts.body,
+                fontWeight: 700,
+              }}
+            >
+              M
+            </div>
+            <div>
+              <div style={{fontFamily: theme.fonts.heading, fontSize: 20, color: theme.colors.text}}>
+                Maggie, 82
+              </div>
+              <div style={{fontFamily: theme.fonts.body, fontSize: 13, color: theme.colors.text, opacity: 0.5}}>
+                Buffalo, NY
+              </div>
+            </div>
+          </div>
+
+          {MEMORIES.map((memory, i) => {
+            const itemProgress = spring({
+              frame: frame - (6 * FPS + i * 12),
+              fps,
+              config: {damping: 16, stiffness: 140},
+            });
+            const show = frame >= 6 * FPS + i * 12;
+            return (
+              <div
+                key={i}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 10,
+                  padding: '8px 12px',
+                  background: show ? 'rgba(255,255,255,0.7)' : 'transparent',
+                  borderRadius: 8,
+                  opacity: show ? itemProgress : 0,
+                  transform: `translateX(${(1 - (show ? itemProgress : 0)) * -20}px)`,
+                }}
+              >
+                <div
+                  style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: '50%',
+                    backgroundColor: theme.colors.accent,
+                    flexShrink: 0,
+                  }}
+                />
+                <span
+                  style={{
+                    fontFamily: theme.fonts.body,
+                    fontSize: 16,
+                    color: theme.colors.text,
+                  }}
+                >
+                  {memory}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Right: Second conversation */}
+        <div
+          style={{
+            flex: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 16,
+            padding: '0 60px',
+          }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 12,
+              marginBottom: 8,
+            }}
+          >
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                backgroundColor: '#4CAF50',
+                boxShadow: '0 0 4px rgba(76,175,80,0.4)',
+              }}
+            />
+            <span
+              style={{
+                fontFamily: theme.fonts.body,
+                fontSize: 13,
+                color: theme.colors.primary,
+                fontWeight: 600,
+                letterSpacing: 1,
+                textTransform: 'uppercase',
+              }}
+            >
+              Conversation #47
+            </span>
+            <VoiceWaveform
+              startFrame={7 * FPS}
+              durationFrames={8 * FPS}
+              color={theme.colors.primary}
+              barCount={16}
+              width={100}
+              height={20}
+            />
+          </div>
+
+          <ConversationThread
+            avatarSrc={staticFile('sophie.jpg')}
+            messages={[
+              {speaker: 'sophie', text: 'You mentioned a new mystery novel last time — how\'s the detective doing?', delay: 7 * FPS},
+              {speaker: 'maggie', text: 'Still one step behind! But I think I figured out the twist.', delay: 9.5 * FPS},
+              {speaker: 'sophie', text: 'No spoilers! But I love that you\'re always ahead of the detective.', delay: 12 * FPS},
+            ]}
+          />
+        </div>
       </div>
 
+      {/* Phase 3: Closing text */}
       <div
         style={{
           position: 'absolute',
@@ -143,26 +308,26 @@ export const ExperienceScene: React.FC = () => {
           flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          opacity: closingOpacity,
+          opacity: closingIn,
         }}
       >
         <h2
           style={{
             fontFamily: theme.fonts.heading,
-            fontSize: 48,
+            fontSize: 44,
             color: theme.colors.primary,
             textAlign: 'center',
             margin: 0,
           }}
         >
-          Available twenty-four seven.
+          No apps. No tablets. No learning curve.
         </h2>
         <p
           style={{
-            fontFamily: theme.fonts.heading,
-            fontSize: 36,
+            fontFamily: theme.fonts.body,
+            fontSize: 28,
             color: theme.colors.secondary,
-            margin: '16px 0 0',
+            margin: '12px 0 0',
           }}
         >
           Your loved one is never alone.
