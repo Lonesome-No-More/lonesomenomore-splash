@@ -1,48 +1,55 @@
 import React from 'react';
 import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, interpolate} from 'remotion';
-import {ProblemScene} from './scenes/ProblemScene';
-import {SolutionScene} from './scenes/SolutionScene';
-import {ExperienceScene} from './scenes/ExperienceScene';
-import {PeaceOfMindScene} from './scenes/PeaceOfMindScene';
+import {OpenScene} from './scenes/OpenScene';
+import {MorningCallScene} from './scenes/MorningCallScene';
+import {AfternoonCallScene} from './scenes/AfternoonCallScene';
+import {CloseScene} from './scenes/CloseScene';
 
 const FPS = 30;
-const TRANSITION = 12;
+const TRANSITION = 10; // 0.33s
 const HALF = TRANSITION / 2;
 
-// ── Audio-driven timeline ──────────────────────────────────────────
-// Act 1 now has 4 separate clips synced to visual beats:
-//   0.0  act1-part1  (2.7s) → ends 2.7   "Millions of seniors..."
-//   3.2  act1-part2  (3.0s) → ends 6.2   "No visitors. No calls..."
-//   6.7  act1-part3  (2.5s) → ends 9.2   "And for their families..."
-//   9.7  act1-part4  (5.8s) → ends 15.5  "The guilt of not being..."
+// ── Audio-driven timeline (demo format) ────────────────────────────
 //
-//  16.5  act2-narration-1 (8.8s) → ends 25.3
-//  25.6  act2-sophie      (3.6s) → ends 29.2
-//  29.5  act2-narration-2 (4.0s) → ends 33.5
-//  34.0  act3-narration-1 (10.8s) → ends 44.8
-//  45.1  act3-sophie      (5.8s) → ends 50.9
-//  51.2  act3-narration-2 (3.7s) → ends 54.9
-//  55.5  act4-narration   (11.1s) → ends 66.6
+//  Scene 1 — Open (0-5.5s): narrator hook + phone ring
+//  Scene 2 — Morning Call (5.5-35s): Sophie-Maggie conversation + family notification
+//  Scene 3 — Afternoon Call (35-67s): second conversation + dashboard
+//  Scene 4 — Close (67-75s): narrator + logo + contact
+//
+//  Audio cue points (global seconds):
+//    0.0  narrator-open        (2.5s)
+//    5.5  sophie-morning-1     (5.7s)
+//   11.4  maggie-morning-1     (5.8s)
+//   17.4  sophie-morning-2     (3.3s)
+//   20.9  maggie-morning-2     (4.9s)
+//   26.0  sophie-morning-3     (5.3s)
+//   36.0  sophie-afternoon-1   (5.9s)
+//   42.1  maggie-afternoon-1   (8.2s)
+//   50.5  sophie-afternoon-2   (2.7s)
+//   53.4  maggie-afternoon-2   (3.5s)
+//   57.1  sophie-afternoon-3   (7.4s)
+//   67.0  narrator-close       (4.8s)
 
 const SCENES = [
-  {Component: ProblemScene, from: 0, duration: 16.5 * FPS},
-  {Component: SolutionScene, from: 16.5 * FPS, duration: 17.5 * FPS},
-  {Component: ExperienceScene, from: 34 * FPS, duration: 21.5 * FPS},
-  {Component: PeaceOfMindScene, from: 55.5 * FPS, duration: 14.5 * FPS},
+  {Component: OpenScene, from: 0, duration: 5.5 * FPS},
+  {Component: MorningCallScene, from: 5.5 * FPS, duration: 29.5 * FPS},
+  {Component: AfternoonCallScene, from: 35 * FPS, duration: 32 * FPS},
+  {Component: CloseScene, from: 67 * FPS, duration: 8 * FPS},
 ];
 
 const AUDIO = [
-  {file: 'act1-part1.mp3', at: 0},
-  {file: 'act1-part2.mp3', at: 3.2},
-  {file: 'act1-part3.mp3', at: 6.7},
-  {file: 'act1-part4.mp3', at: 9.7},
-  {file: 'act2-narration-1.mp3', at: 16.5},
-  {file: 'act2-sophie.mp3', at: 25.6},
-  {file: 'act2-narration-2.mp3', at: 29.5},
-  {file: 'act3-narration-1.mp3', at: 34.0},
-  {file: 'act3-sophie.mp3', at: 45.1},
-  {file: 'act3-narration-2.mp3', at: 51.2},
-  {file: 'act4-narration.mp3', at: 55.5},
+  {file: 'narrator-open.mp3', at: 0},
+  {file: 'sophie-morning-1.mp3', at: 5.5},
+  {file: 'maggie-morning-1.mp3', at: 11.4},
+  {file: 'sophie-morning-2.mp3', at: 17.4},
+  {file: 'maggie-morning-2.mp3', at: 20.9},
+  {file: 'sophie-morning-3.mp3', at: 26.0},
+  {file: 'sophie-afternoon-1.mp3', at: 36.0},
+  {file: 'maggie-afternoon-1.mp3', at: 42.1},
+  {file: 'sophie-afternoon-2.mp3', at: 50.5},
+  {file: 'maggie-afternoon-2.mp3', at: 53.4},
+  {file: 'sophie-afternoon-3.mp3', at: 57.1},
+  {file: 'narrator-close.mp3', at: 67.0},
 ];
 
 const SceneWithTransition: React.FC<{

@@ -3,81 +3,88 @@
   "sophie_voice": "Jessica",
   "segments": [
     {
-      "id": "act1-part1",
-      "scene": "problem",
+      "id": "narrator-open",
+      "scene": "open",
       "voice": "narrator",
-      "text": "Millions of seniors spend their days in silence.",
+      "text": "What if your mom had someone to talk to every day?",
       "start_seconds": 0
     },
     {
-      "id": "act1-part2",
-      "scene": "problem",
-      "voice": "narrator",
-      "text": "No visitors. No calls. Just the quiet.",
-      "start_seconds": 4
-    },
-    {
-      "id": "act1-part3",
-      "scene": "problem",
-      "voice": "narrator",
-      "text": "And for their families — there's the worry.",
+      "id": "sophie-morning-1",
+      "scene": "morning",
+      "voice": "sophie",
+      "text": "Good morning, Maggie! I've been thinking about you. Did Emma ever get the hang of that bicycle?",
       "start_seconds": 8
     },
     {
-      "id": "act1-part4",
-      "scene": "problem",
+      "id": "maggie-morning-1",
+      "scene": "morning",
       "voice": "narrator",
-      "text": "The guilt of not being there enough. The wish that someone — anyone — could just check in.",
-      "start_seconds": 12
+      "text": "She did! You should have seen her, Sophie. She rode all the way down the driveway, no training wheels!",
+      "start_seconds": 14
     },
     {
-      "id": "act2-narration-1",
-      "scene": "solution",
-      "voice": "narrator",
-      "text": "That's why we built Lonesome No More. A companion who calls your loved one by name... who remembers their stories... and who's always just a phone call away.",
-      "start_seconds": 25
-    },
-    {
-      "id": "act2-sophie",
-      "scene": "solution",
+      "id": "sophie-morning-2",
+      "scene": "morning",
       "voice": "sophie",
-      "text": "Good morning, Maggie! Did Emma ever get the hang of that bicycle?",
-      "start_seconds": 40
+      "text": "Oh, that's wonderful! I bet grandma was cheering from the porch.",
+      "start_seconds": 20
     },
     {
-      "id": "act2-narration-2",
-      "scene": "solution",
+      "id": "maggie-morning-2",
+      "scene": "morning",
       "voice": "narrator",
-      "text": "No apps. No tablets. No learning curve. Just pick up the phone.",
-      "start_seconds": 46
+      "text": "You bet I was! I made her my famous dumplings to celebrate. She ate four of them!",
+      "start_seconds": 24
     },
     {
-      "id": "act3-narration-1",
-      "scene": "experience",
+      "id": "sophie-morning-3",
+      "scene": "morning",
+      "voice": "sophie",
+      "text": "Four! That's a new record. Those dumplings really are legendary, Maggie.",
+      "start_seconds": 29
+    },
+    {
+      "id": "sophie-afternoon-1",
+      "scene": "afternoon",
+      "voice": "sophie",
+      "text": "So tell me, how's that mystery novel going? Last time you said the detective was completely lost.",
+      "start_seconds": 37
+    },
+    {
+      "id": "maggie-afternoon-1",
+      "scene": "afternoon",
       "voice": "narrator",
-      "text": "Sophie remembers everything — the grandkids' names, the mystery novels, even the legendary dumplings. Every conversation picks up right where the last one left off.",
+      "text": "Oh, I finished it! And I was right — the butler didn't do it. Forty years as a librarian, you learn to spot the clues.",
+      "start_seconds": 42
+    },
+    {
+      "id": "sophie-afternoon-2",
+      "scene": "afternoon",
+      "voice": "sophie",
+      "text": "I love that! Have you picked up a new one yet?",
+      "start_seconds": 49
+    },
+    {
+      "id": "maggie-afternoon-2",
+      "scene": "afternoon",
+      "voice": "narrator",
+      "text": "Not yet. I've been a little tired this week, to be honest.",
+      "start_seconds": 52
+    },
+    {
+      "id": "sophie-afternoon-3",
+      "scene": "afternoon",
+      "voice": "sophie",
+      "text": "I'm sorry to hear that. Have you been sleeping okay? Sometimes a good cup of Earl Grey and an early night works wonders.",
       "start_seconds": 55
     },
     {
-      "id": "act3-sophie",
-      "scene": "experience",
-      "voice": "sophie",
-      "text": "You mentioned you were trying that new mystery novel. How's the detective — still one step behind?",
-      "start_seconds": 68
-    },
-    {
-      "id": "act3-narration-2",
-      "scene": "experience",
+      "id": "narrator-close",
+      "scene": "close",
       "voice": "narrator",
-      "text": "Available twenty-four seven. Your loved one is never alone.",
-      "start_seconds": 76
-    },
-    {
-      "id": "act4-narration",
-      "scene": "peaceofmind",
-      "voice": "narrator",
-      "text": "And for you? A weekly summary of how they're doing. The stories they shared. The moments that mattered. Lonesome No More — companionship for your loved ones. Peace of mind for you.",
-      "start_seconds": 85
+      "text": "Lonesome No More. Companionship for your loved ones. Peace of mind for you.",
+      "start_seconds": 63
     }
   ]
 }
