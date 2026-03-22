@@ -1,5 +1,5 @@
 import React from 'react';
-import {AbsoluteFill, Sequence, useCurrentFrame, interpolate} from 'remotion';
+import {AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, interpolate} from 'remotion';
 import {ProblemScene} from './scenes/ProblemScene';
 import {SolutionScene} from './scenes/SolutionScene';
 import {ExperienceScene} from './scenes/ExperienceScene';
@@ -83,6 +83,32 @@ export const Video: React.FC = () => {
           </Sequence>
         );
       })}
+
+      {/* Audio layers */}
+      <Sequence from={0} durationInFrames={25 * FPS}>
+        <Audio src={staticFile('audio/act1-narration.mp3')} />
+      </Sequence>
+      <Sequence from={25 * FPS}>
+        <Audio src={staticFile('audio/act2-narration-1.mp3')} />
+      </Sequence>
+      <Sequence from={40 * FPS}>
+        <Audio src={staticFile('audio/act2-sophie.mp3')} />
+      </Sequence>
+      <Sequence from={46 * FPS}>
+        <Audio src={staticFile('audio/act2-narration-2.mp3')} />
+      </Sequence>
+      <Sequence from={55 * FPS}>
+        <Audio src={staticFile('audio/act3-narration-1.mp3')} />
+      </Sequence>
+      <Sequence from={68 * FPS}>
+        <Audio src={staticFile('audio/act3-sophie.mp3')} />
+      </Sequence>
+      <Sequence from={76 * FPS}>
+        <Audio src={staticFile('audio/act3-narration-2.mp3')} />
+      </Sequence>
+      <Sequence from={85 * FPS}>
+        <Audio src={staticFile('audio/act4-narration.mp3')} />
+      </Sequence>
     </AbsoluteFill>
   );
 };
