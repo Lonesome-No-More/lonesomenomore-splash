@@ -2,5 +2,6 @@ node_modules/
 out/
 src/assets/audio/*.mp3
 src/assets/audio/manifest.json
+public/audio/
 .env
 dist/
