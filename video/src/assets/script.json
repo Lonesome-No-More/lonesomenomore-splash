@@ -3,11 +3,32 @@
   "sophie_voice": "Jessica",
   "segments": [
     {
-      "id": "act1-narration",
+      "id": "act1-part1",
       "scene": "problem",
       "voice": "narrator",
-      "text": "Millions of seniors spend their days in silence. No visitors. No calls. Just the quiet. And for their families... there's the worry. The guilt of not being there enough. The wish that someone — anyone — could just check in.",
+      "text": "Millions of seniors spend their days in silence.",
       "start_seconds": 0
+    },
+    {
+      "id": "act1-part2",
+      "scene": "problem",
+      "voice": "narrator",
+      "text": "No visitors. No calls. Just the quiet.",
+      "start_seconds": 4
+    },
+    {
+      "id": "act1-part3",
+      "scene": "problem",
+      "voice": "narrator",
+      "text": "And for their families — there's the worry.",
+      "start_seconds": 8
+    },
+    {
+      "id": "act1-part4",
+      "scene": "problem",
+      "voice": "narrator",
+      "text": "The guilt of not being there enough. The wish that someone — anyone — could just check in.",
+      "start_seconds": 12
     },
     {
       "id": "act2-narration-1",
@@ -34,7 +55,7 @@
       "id": "act3-narration-1",
       "scene": "experience",
       "voice": "narrator",
-      "text": "Sophie remembers everything — the grandkids' names, the Chopin pieces, even the legendary dumplings. Every conversation picks up right where the last one left off.",
+      "text": "Sophie remembers everything — the grandkids' names, the mystery novels, even the legendary dumplings. Every conversation picks up right where the last one left off.",
       "start_seconds": 55
     },
     {

@@ -76,8 +76,15 @@ export const ExperienceScene: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{backgroundColor: theme.colors.bgSoft}}>
+    <AbsoluteFill style={{background: `linear-gradient(135deg, ${theme.colors.bgSoft} 0%, #f8f4ee 40%, ${theme.colors.bgWarm} 100%)`}}>
       <FloatingOrbs orbs={ORBS} />
+
+      {/* Subtle dot pattern */}
+      <div style={{
+        position: 'absolute', inset: 0, opacity: 0.02,
+        backgroundImage: `radial-gradient(circle, ${theme.colors.primary} 1px, transparent 1px)`,
+        backgroundSize: '28px 28px',
+      }} />
 
       {/* Phase 1: Feature cards */}
       <div

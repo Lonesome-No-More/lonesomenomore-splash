@@ -6,27 +6,23 @@ import {ExperienceScene} from './scenes/ExperienceScene';
 import {PeaceOfMindScene} from './scenes/PeaceOfMindScene';
 
 const FPS = 30;
-const TRANSITION = 12; // 0.4s cross-fade
+const TRANSITION = 12;
 const HALF = TRANSITION / 2;
 
 // ── Audio-driven timeline ──────────────────────────────────────────
-// Built from actual audio durations (manifest.json) with 0.3s gaps.
+// Act 1 now has 4 separate clips synced to visual beats:
+//   0.0  act1-part1  (2.7s) → ends 2.7   "Millions of seniors..."
+//   3.2  act1-part2  (3.0s) → ends 6.2   "No visitors. No calls..."
+//   6.7  act1-part3  (2.5s) → ends 9.2   "And for their families..."
+//   9.7  act1-part4  (5.8s) → ends 15.5  "The guilt of not being..."
 //
-// Audio cue points (seconds):
-//   0.0  act1-narration     (15.9s) → ends 15.9
-//  16.5  act2-narration-1   ( 8.8s) → ends 25.3
-//  25.6  act2-sophie        ( 3.6s) → ends 29.2
-//  29.5  act2-narration-2   ( 4.0s) → ends 33.5
-//  34.0  act3-narration-1   (10.8s) → ends 44.8
-//  45.1  act3-sophie        ( 5.8s) → ends 50.9
-//  51.2  act3-narration-2   ( 3.7s) → ends 54.9
-//  55.5  act4-narration     (11.1s) → ends 66.6
-//
-// Scene boundaries:
-//   Act 1:  0.0 – 16.5   (16.5s)
-//   Act 2: 16.5 – 34.0   (17.5s)
-//   Act 3: 34.0 – 55.5   (21.5s)
-//   Act 4: 55.5 – 70.0   (14.5s)
+//  16.5  act2-narration-1 (8.8s) → ends 25.3
+//  25.6  act2-sophie      (3.6s) → ends 29.2
+//  29.5  act2-narration-2 (4.0s) → ends 33.5
+//  34.0  act3-narration-1 (10.8s) → ends 44.8
+//  45.1  act3-sophie      (5.8s) → ends 50.9
+//  51.2  act3-narration-2 (3.7s) → ends 54.9
+//  55.5  act4-narration   (11.1s) → ends 66.6
 
 const SCENES = [
   {Component: ProblemScene, from: 0, duration: 16.5 * FPS},
@@ -35,9 +31,11 @@ const SCENES = [
   {Component: PeaceOfMindScene, from: 55.5 * FPS, duration: 14.5 * FPS},
 ];
 
-// Audio cue points in seconds
 const AUDIO = [
-  {file: 'act1-narration.mp3', at: 0},
+  {file: 'act1-part1.mp3', at: 0},
+  {file: 'act1-part2.mp3', at: 3.2},
+  {file: 'act1-part3.mp3', at: 6.7},
+  {file: 'act1-part4.mp3', at: 9.7},
   {file: 'act2-narration-1.mp3', at: 16.5},
   {file: 'act2-sophie.mp3', at: 25.6},
   {file: 'act2-narration-2.mp3', at: 29.5},
@@ -96,7 +94,6 @@ export const Video: React.FC = () => {
         );
       })}
 
-      {/* Audio — placed at exact cue points from manifest */}
       {AUDIO.map(({file, at}) => (
         <Sequence key={file} from={Math.round(at * FPS)}>
           <Audio src={staticFile(`audio/${file}`)} />

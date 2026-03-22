@@ -73,8 +73,14 @@ export const SolutionScene: React.FC = () => {
   });
 
   return (
-    <AbsoluteFill style={{backgroundColor: theme.colors.bgWarm}}>
+    <AbsoluteFill style={{background: `radial-gradient(ellipse at 60% 40%, #fffefb 0%, ${theme.colors.bgWarm} 50%, #f3ebe0 100%)`}}>
       <FloatingOrbs orbs={ORBS} />
+
+      {/* Decorative corner accent */}
+      <div style={{
+        position: 'absolute', top: 0, right: 0, width: 300, height: 300,
+        background: `radial-gradient(circle at 100% 0%, ${theme.colors.accent}10 0%, transparent 70%)`,
+      }} />
 
       {/* Phase 1: Logo */}
       <div

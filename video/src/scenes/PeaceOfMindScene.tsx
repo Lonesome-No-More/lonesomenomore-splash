@@ -58,8 +58,14 @@ export const PeaceOfMindScene: React.FC = () => {
   const ctaOpacity = frame >= 8 * FPS ? ctaProgress : 0;
 
   return (
-    <AbsoluteFill style={{backgroundColor: theme.colors.bgWarm}}>
+    <AbsoluteFill style={{background: `radial-gradient(ellipse at 40% 60%, #fffefb 0%, ${theme.colors.bgWarm} 50%, #f0e8d8 100%)`}}>
       <FloatingOrbs orbs={ORBS} />
+
+      {/* Decorative accents */}
+      <div style={{
+        position: 'absolute', bottom: 0, left: 0, width: 400, height: 400,
+        background: `radial-gradient(circle at 0% 100%, ${theme.colors.primary}08 0%, transparent 70%)`,
+      }} />
 
       {/* Phase 1: Dashboard */}
       <div
@@ -202,18 +208,22 @@ export const PeaceOfMindScene: React.FC = () => {
           borderRadius: 2, margin: '4px 0',
         }} />
         <div style={{
-          display: 'flex', gap: 40,
-          fontFamily: theme.fonts.body, fontSize: 22, color: theme.colors.text,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
+          marginTop: 4,
         }}>
-          <span style={{fontWeight: 600}}>(833) 817-4646</span>
-          <span>lonesomenomore.com</span>
-        </div>
-        <div style={{
-          marginTop: 8, padding: '10px 28px',
-          backgroundColor: theme.colors.secondary, borderRadius: 24,
-          fontFamily: theme.fonts.body, fontSize: 18, color: 'white', fontWeight: 600,
-        }}>
-          Try the free beta →
+          <div style={{
+            fontFamily: theme.fonts.body, fontSize: 18, color: theme.colors.text,
+            opacity: 0.6, letterSpacing: 1,
+          }}>
+            Contact us for more information
+          </div>
+          <div style={{
+            display: 'flex', gap: 40,
+            fontFamily: theme.fonts.body, fontSize: 22, color: theme.colors.text,
+          }}>
+            <span style={{fontWeight: 600}}>(833) 817-4646</span>
+            <span>lonesomenomore.com</span>
+          </div>
         </div>
       </div>
     </AbsoluteFill>
