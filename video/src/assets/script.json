@@ -10,6 +10,13 @@
       "start_seconds": 0
     },
     {
+      "id": "narrator-signup",
+      "scene": "signup",
+      "voice": "narrator",
+      "text": "Getting started is simple. Tell us about your loved one, and we'll take care of the rest.",
+      "start_seconds": 5
+    },
+    {
       "id": "sophie-call-1",
       "scene": "call",
       "voice": "sophie",
@@ -36,6 +43,27 @@
       "voice": "narrator",
       "text": "Not yet. I've been a little tired this week, to be honest.",
       "start_seconds": 25
+    },
+    {
+      "id": "narrator-portal",
+      "scene": "portal",
+      "voice": "narrator",
+      "text": "Every conversation is analyzed for mood, sentiment, and anything that needs attention. You see exactly how your loved one is doing.",
+      "start_seconds": 30
+    },
+    {
+      "id": "narrator-dashboard",
+      "scene": "portal",
+      "voice": "narrator",
+      "text": "The dashboard tracks call history, mood trends, and highlights — all in one place.",
+      "start_seconds": 38
+    },
+    {
+      "id": "narrator-email",
+      "scene": "email",
+      "voice": "narrator",
+      "text": "And each week, you receive a summary straight to your inbox — the stories, the moments, and gentle alerts if something needs your attention.",
+      "start_seconds": 45
     },
     {
       "id": "narrator-close",

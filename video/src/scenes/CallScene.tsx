@@ -1,8 +1,7 @@
 import React from 'react';
-import {AbsoluteFill, useCurrentFrame} from 'remotion';
+import {AbsoluteFill} from 'remotion';
 import {CallScreen} from '../components/CallScreen';
 import {ParticleField} from '../components/ParticleField';
-import {theme} from '../styles/theme';
 import {loadFont} from '@remotion/google-fonts/Merriweather';
 import {loadFont as loadInter} from '@remotion/google-fonts/Inter';
 
@@ -11,16 +10,14 @@ loadInter();
 
 const FPS = 30;
 
-// Scene: 12-30s (18s = 540 frames)
+// Scene: 12-31s (19s = 570 frames)
 // Audio (relative to scene start, subtract 12s):
 //   0.0s  sophie-call-1  (3.5s) → ends 3.5
 //   3.8s  maggie-call-1  (5.7s) → ends 9.5
-//   9.8s  sophie-call-2  (4.5s) → ends 14.3
-//  14.6s  maggie-call-2  (3.2s) → ends 17.8
+//  10.0s  sophie-call-2  (4.7s) → ends 14.7
+//  15.0s  maggie-call-2  (3.3s) → ends 18.3
 
 export const CallScene: React.FC = () => {
-  const frame = useCurrentFrame();
-
   return (
     <AbsoluteFill>
       <CallScreen
@@ -42,18 +39,17 @@ export const CallScene: React.FC = () => {
           {
             speaker: 'sophie',
             text: 'Those dumplings really are legendary! Have you picked up a new mystery novel yet?',
-            startFrame: Math.round(9.8 * FPS),
-            durationFrames: Math.round(4.5 * FPS),
+            startFrame: Math.round(10.0 * FPS),
+            durationFrames: Math.round(4.7 * FPS),
           },
           {
             speaker: 'maggie',
             text: "Not yet. I've been a little tired this week, to be honest.",
-            startFrame: Math.round(14.6 * FPS),
-            durationFrames: Math.round(3.2 * FPS),
+            startFrame: Math.round(15.0 * FPS),
+            durationFrames: Math.round(3.3 * FPS),
           },
         ]}
       />
-      {/* Extra particle layer over dark call UI */}
       <ParticleField count={20} color="rgba(232,170,107,0.06)" speed={0.3} />
     </AbsoluteFill>
   );

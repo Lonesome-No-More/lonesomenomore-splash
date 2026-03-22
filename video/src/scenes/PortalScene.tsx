@@ -58,15 +58,15 @@ export const PortalScene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
-  // Phase transitions
-  const phase1Opacity = interpolate(frame, [7.5 * FPS, 8 * FPS], [1, 0], {
+  // Phase transitions — dashboard narration starts at 8.5s into scene
+  const phase1Opacity = interpolate(frame, [8 * FPS, 8.5 * FPS], [1, 0], {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
   });
-  const phase2Opacity = interpolate(frame, [7.5 * FPS, 8 * FPS], [0, 1], {
+  const phase2Opacity = interpolate(frame, [8 * FPS, 8.5 * FPS], [0, 1], {
     extrapolateLeft: 'clamp', extrapolateRight: 'clamp',
   });
 
-  const isPhase2 = frame >= 7.5 * FPS;
+  const isPhase2 = frame >= 8 * FPS;
   const navItems = isPhase2 ? NAV_ITEMS_DASH : NAV_ITEMS;
 
   const gradAngle = 145 + Math.sin(frame * 0.008) * 5;
@@ -296,7 +296,7 @@ export const PortalScene: React.FC = () => {
                 {icon: '💚', label: 'System Health', value: 'All Good', color: '#059669'},
               ].map((stat, i) => {
                 const sp = spring({
-                  frame: Math.max(0, frame - (8 * FPS + i * 4)),
+                  frame: Math.max(0, frame - (8.5 * FPS + i * 4)),
                   fps, config: {damping: 14, stiffness: 130},
                 });
                 const show = frame >= 8 * FPS + i * 4;
@@ -337,7 +337,7 @@ export const PortalScene: React.FC = () => {
                 <div style={{display: 'flex', flexDirection: 'column', gap: 8}}>
                   {RECENT_CALLS.map((call, i) => {
                     const sp = spring({
-                      frame: Math.max(0, frame - (9 * FPS + i * 6)),
+                      frame: Math.max(0, frame - (9.5 * FPS + i * 6)),
                       fps, config: {damping: 16, stiffness: 130},
                     });
                     const show = frame >= 9 * FPS + i * 6;
