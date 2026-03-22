@@ -6,19 +6,45 @@ import {ExperienceScene} from './scenes/ExperienceScene';
 import {PeaceOfMindScene} from './scenes/PeaceOfMindScene';
 
 const FPS = 30;
-const TRANSITION = 12; // 0.4s cross-fade (was 1s)
+const TRANSITION = 12; // 0.4s cross-fade
 const HALF = TRANSITION / 2;
 
-// New 60s layout:
-// Act 1: 0-15s (problem)
-// Act 2: 15-32s (solution — logo, phone, conversation)
-// Act 3: 32-50s (experience — features, memory panel, second convo)
-// Act 4: 50-62s (peace of mind — dashboard, CTA)
+// ── Audio-driven timeline ──────────────────────────────────────────
+// Built from actual audio durations (manifest.json) with 0.3s gaps.
+//
+// Audio cue points (seconds):
+//   0.0  act1-narration     (15.9s) → ends 15.9
+//  16.5  act2-narration-1   ( 8.8s) → ends 25.3
+//  25.6  act2-sophie        ( 3.6s) → ends 29.2
+//  29.5  act2-narration-2   ( 4.0s) → ends 33.5
+//  34.0  act3-narration-1   (10.8s) → ends 44.8
+//  45.1  act3-sophie        ( 5.8s) → ends 50.9
+//  51.2  act3-narration-2   ( 3.7s) → ends 54.9
+//  55.5  act4-narration     (11.1s) → ends 66.6
+//
+// Scene boundaries:
+//   Act 1:  0.0 – 16.5   (16.5s)
+//   Act 2: 16.5 – 34.0   (17.5s)
+//   Act 3: 34.0 – 55.5   (21.5s)
+//   Act 4: 55.5 – 70.0   (14.5s)
+
 const SCENES = [
-  {Component: ProblemScene, from: 0, duration: 15 * FPS},
-  {Component: SolutionScene, from: 15 * FPS, duration: 17 * FPS},
-  {Component: ExperienceScene, from: 32 * FPS, duration: 18 * FPS},
-  {Component: PeaceOfMindScene, from: 50 * FPS, duration: 12 * FPS},
+  {Component: ProblemScene, from: 0, duration: 16.5 * FPS},
+  {Component: SolutionScene, from: 16.5 * FPS, duration: 17.5 * FPS},
+  {Component: ExperienceScene, from: 34 * FPS, duration: 21.5 * FPS},
+  {Component: PeaceOfMindScene, from: 55.5 * FPS, duration: 14.5 * FPS},
+];
+
+// Audio cue points in seconds
+const AUDIO = [
+  {file: 'act1-narration.mp3', at: 0},
+  {file: 'act2-narration-1.mp3', at: 16.5},
+  {file: 'act2-sophie.mp3', at: 25.6},
+  {file: 'act2-narration-2.mp3', at: 29.5},
+  {file: 'act3-narration-1.mp3', at: 34.0},
+  {file: 'act3-sophie.mp3', at: 45.1},
+  {file: 'act3-narration-2.mp3', at: 51.2},
+  {file: 'act4-narration.mp3', at: 55.5},
 ];
 
 const SceneWithTransition: React.FC<{
@@ -42,10 +68,8 @@ const SceneWithTransition: React.FC<{
         {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}
       );
 
-  const opacity = Math.min(fadeIn, fadeOut);
-
   return (
-    <AbsoluteFill style={{opacity}}>
+    <AbsoluteFill style={{opacity: Math.min(fadeIn, fadeOut)}}>
       {children}
     </AbsoluteFill>
   );
@@ -72,31 +96,12 @@ export const Video: React.FC = () => {
         );
       })}
 
-      {/* Audio layers — compressed timing */}
-      <Sequence from={0}>
-        <Audio src={staticFile('audio/act1-narration.mp3')} />
-      </Sequence>
-      <Sequence from={15 * FPS}>
-        <Audio src={staticFile('audio/act2-narration-1.mp3')} />
-      </Sequence>
-      <Sequence from={22 * FPS}>
-        <Audio src={staticFile('audio/act2-sophie.mp3')} />
-      </Sequence>
-      <Sequence from={26 * FPS}>
-        <Audio src={staticFile('audio/act2-narration-2.mp3')} />
-      </Sequence>
-      <Sequence from={32 * FPS}>
-        <Audio src={staticFile('audio/act3-narration-1.mp3')} />
-      </Sequence>
-      <Sequence from={40 * FPS}>
-        <Audio src={staticFile('audio/act3-sophie.mp3')} />
-      </Sequence>
-      <Sequence from={44 * FPS}>
-        <Audio src={staticFile('audio/act3-narration-2.mp3')} />
-      </Sequence>
-      <Sequence from={50 * FPS}>
-        <Audio src={staticFile('audio/act4-narration.mp3')} />
-      </Sequence>
+      {/* Audio — placed at exact cue points from manifest */}
+      {AUDIO.map(({file, at}) => (
+        <Sequence key={file} from={Math.round(at * FPS)}>
+          <Audio src={staticFile(`audio/${file}`)} />
+        </Sequence>
+      ))}
     </AbsoluteFill>
   );
 };

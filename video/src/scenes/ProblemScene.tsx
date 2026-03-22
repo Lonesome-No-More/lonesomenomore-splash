@@ -10,12 +10,14 @@ loadInter();
 
 const FPS = 30;
 
-// Rapid-fire stats, tight timing — 15s total
+// Scene duration: 16.5s (495 frames)
+// Audio: act1-narration runs 0-15.9s
+// 4 stats across 15s, ~3.7s each with overlap on fades
 const STATS = [
-  {text: '43% of seniors feel lonely', from: 0.3 * FPS, to: 3.5 * FPS},
-  {text: '8 million live completely alone', from: 3.8 * FPS, to: 7 * FPS},
-  {text: '1 in 4 go days without a conversation', from: 7.3 * FPS, to: 10.5 * FPS},
-  {text: 'For their families — there\'s the worry.', from: 10.8 * FPS, to: 14 * FPS},
+  {text: '43% of seniors feel lonely', from: 0.3 * FPS, to: 4 * FPS},
+  {text: '8 million live completely alone', from: 4 * FPS, to: 7.7 * FPS},
+  {text: '1 in 4 go days without a conversation', from: 7.7 * FPS, to: 11.5 * FPS},
+  {text: 'For their families — there\'s the worry.', from: 11.5 * FPS, to: 15.5 * FPS},
 ];
 
 const ORBS = [
@@ -38,7 +40,7 @@ export const ProblemScene: React.FC = () => {
     >
       <FloatingOrbs orbs={ORBS} />
 
-      {/* Counter in corner showing growing number */}
+      {/* Label */}
       <div
         style={{
           position: 'absolute',
@@ -52,10 +54,10 @@ export const ProblemScene: React.FC = () => {
           textTransform: 'uppercase',
         }}
       >
-        {frame < 14 * FPS && 'The loneliness epidemic'}
+        {frame < 15.5 * FPS && 'The loneliness epidemic'}
       </div>
 
-      {/* Progress bar at bottom */}
+      {/* Progress bar */}
       <div
         style={{
           position: 'absolute',
@@ -64,23 +66,23 @@ export const ProblemScene: React.FC = () => {
           height: 3,
           backgroundColor: theme.colors.secondary,
           opacity: 0.4,
-          width: `${interpolate(frame, [0, 14 * FPS], [0, 100], {
+          width: `${interpolate(frame, [0, 15.5 * FPS], [0, 100], {
             extrapolateRight: 'clamp',
           })}%`,
         }}
       />
 
       {STATS.map((stat, i) => {
-        const fadeIn = interpolate(frame, [stat.from, stat.from + 8], [0, 1], {
+        const fadeIn = interpolate(frame, [stat.from, stat.from + 10], [0, 1], {
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp',
         });
-        const fadeOut = interpolate(frame, [stat.to - 8, stat.to], [1, 0], {
+        const fadeOut = interpolate(frame, [stat.to - 10, stat.to], [1, 0], {
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp',
         });
         const opacity = Math.min(fadeIn, fadeOut);
-        const translateY = interpolate(frame, [stat.from, stat.from + 8], [12, 0], {
+        const translateY = interpolate(frame, [stat.from, stat.from + 10], [12, 0], {
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp',
         });
