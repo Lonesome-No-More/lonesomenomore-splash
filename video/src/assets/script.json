@@ -10,81 +10,39 @@
       "start_seconds": 0
     },
     {
-      "id": "sophie-morning-1",
-      "scene": "morning",
+      "id": "sophie-call-1",
+      "scene": "call",
       "voice": "sophie",
-      "text": "Good morning, Maggie! I've been thinking about you. Did Emma ever get the hang of that bicycle?",
-      "start_seconds": 8
+      "text": "Good morning, Maggie! Did Emma ever get the hang of that bicycle?",
+      "start_seconds": 12
     },
     {
-      "id": "maggie-morning-1",
-      "scene": "morning",
+      "id": "maggie-call-1",
+      "scene": "call",
       "voice": "narrator",
-      "text": "She did! You should have seen her, Sophie. She rode all the way down the driveway, no training wheels!",
-      "start_seconds": 14
+      "text": "She did! Rode all the way down the driveway. I made her my famous dumplings to celebrate.",
+      "start_seconds": 16
     },
     {
-      "id": "sophie-morning-2",
-      "scene": "morning",
+      "id": "sophie-call-2",
+      "scene": "call",
       "voice": "sophie",
-      "text": "Oh, that's wonderful! I bet grandma was cheering from the porch.",
-      "start_seconds": 20
+      "text": "Those dumplings really are legendary! Have you picked up a new mystery novel yet?",
+      "start_seconds": 21
     },
     {
-      "id": "maggie-morning-2",
-      "scene": "morning",
-      "voice": "narrator",
-      "text": "You bet I was! I made her my famous dumplings to celebrate. She ate four of them!",
-      "start_seconds": 24
-    },
-    {
-      "id": "sophie-morning-3",
-      "scene": "morning",
-      "voice": "sophie",
-      "text": "Four! That's a new record. Those dumplings really are legendary, Maggie.",
-      "start_seconds": 29
-    },
-    {
-      "id": "sophie-afternoon-1",
-      "scene": "afternoon",
-      "voice": "sophie",
-      "text": "So tell me, how's that mystery novel going? Last time you said the detective was completely lost.",
-      "start_seconds": 37
-    },
-    {
-      "id": "maggie-afternoon-1",
-      "scene": "afternoon",
-      "voice": "narrator",
-      "text": "Oh, I finished it! And I was right — the butler didn't do it. Forty years as a librarian, you learn to spot the clues.",
-      "start_seconds": 42
-    },
-    {
-      "id": "sophie-afternoon-2",
-      "scene": "afternoon",
-      "voice": "sophie",
-      "text": "I love that! Have you picked up a new one yet?",
-      "start_seconds": 49
-    },
-    {
-      "id": "maggie-afternoon-2",
-      "scene": "afternoon",
+      "id": "maggie-call-2",
+      "scene": "call",
       "voice": "narrator",
       "text": "Not yet. I've been a little tired this week, to be honest.",
-      "start_seconds": 52
-    },
-    {
-      "id": "sophie-afternoon-3",
-      "scene": "afternoon",
-      "voice": "sophie",
-      "text": "I'm sorry to hear that. Have you been sleeping okay? Sometimes a good cup of Earl Grey and an early night works wonders.",
-      "start_seconds": 55
+      "start_seconds": 25
     },
     {
       "id": "narrator-close",
       "scene": "close",
       "voice": "narrator",
       "text": "Lonesome No More. Companionship for your loved ones. Peace of mind for you.",
-      "start_seconds": 63
+      "start_seconds": 52
     }
   ]
 }
