@@ -30,16 +30,16 @@ export const SolutionScene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
-  const logoScale = spring({frame, fps, config: {damping: 12, stiffness: 80}});
-  const phoneEnterFrame = 10 * FPS;
-  const sophieBubbleFrame = 15 * FPS;
-  const taglineFrame = 21 * FPS;
-  const taglineOpacity = interpolate(frame, [taglineFrame, taglineFrame + 20], [0, 1], {
+  const logoScale = spring({frame, fps, config: {damping: 12, stiffness: 100}});
+  const phoneEnterFrame = 6 * FPS;
+  const sophieBubbleFrame = 10 * FPS;
+  const taglineFrame = 18 * FPS;
+  const taglineOpacity = interpolate(frame, [taglineFrame, taglineFrame + 12], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const titleOpacity = interpolate(frame, [phoneEnterFrame - 15, phoneEnterFrame], [1, 0], {
+  const titleOpacity = interpolate(frame, [phoneEnterFrame - 10, phoneEnterFrame], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });

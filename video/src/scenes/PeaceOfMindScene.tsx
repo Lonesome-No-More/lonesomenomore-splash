@@ -35,13 +35,13 @@ export const PeaceOfMindScene: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
 
-  const summaryCardFrame = 1 * FPS;
-  const summaryOpacity = interpolate(frame, [8 * FPS, 9 * FPS], [1, 0], {
+  const summaryCardFrame = 0.5 * FPS;
+  const summaryOpacity = interpolate(frame, [6 * FPS, 7 * FPS], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const ctaFrame = 9 * FPS;
+  const ctaFrame = 7 * FPS;
   const ctaProgress = spring({
     frame: frame - ctaFrame,
     fps,
@@ -98,7 +98,7 @@ export const PeaceOfMindScene: React.FC = () => {
             {HIGHLIGHTS.map((highlight, i) => {
               const itemOpacity = interpolate(
                 frame,
-                [summaryCardFrame + (i + 1) * 20, summaryCardFrame + (i + 1) * 20 + 15],
+                [summaryCardFrame + (i + 1) * 12, summaryCardFrame + (i + 1) * 12 + 10],
                 [0, 1],
                 {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}
               );

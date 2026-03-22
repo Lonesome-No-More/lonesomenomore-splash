@@ -23,40 +23,40 @@ const FEATURES = [
     title: 'Truly Personalized',
     description: 'Remembers their life story, interests, and family',
     icon: '💛',
-    enterFrame: 2 * FPS,
+    enterFrame: 1 * FPS,
   },
   {
     title: 'Available 24/7',
     description: 'Call anytime, on any phone, from anywhere',
     icon: '📞',
-    enterFrame: 5 * FPS,
+    enterFrame: 3 * FPS,
   },
   {
     title: 'Effortlessly Simple',
     description: 'No apps, no tablets — just a phone call',
     icon: '✨',
-    enterFrame: 8 * FPS,
+    enterFrame: 5 * FPS,
   },
 ];
 
 export const ExperienceScene: React.FC = () => {
   const frame = useCurrentFrame();
 
-  const cardsOpacity = interpolate(frame, [13 * FPS, 14 * FPS], [1, 0], {
+  const cardsOpacity = interpolate(frame, [10 * FPS, 11 * FPS], [1, 0], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });
 
-  const sophieBubbleFrame = 13 * FPS;
+  const sophieBubbleFrame = 10 * FPS;
   const chatOpacity = interpolate(
     frame,
-    [sophieBubbleFrame, sophieBubbleFrame + 10, 25 * FPS, 26 * FPS],
+    [sophieBubbleFrame, sophieBubbleFrame + 10, 20 * FPS, 21 * FPS],
     [0, 1, 1, 0],
     {extrapolateLeft: 'clamp', extrapolateRight: 'clamp'}
   );
 
-  const closingFrame = 24 * FPS;
-  const closingOpacity = interpolate(frame, [closingFrame, closingFrame + 15], [0, 1], {
+  const closingFrame = 21 * FPS;
+  const closingOpacity = interpolate(frame, [closingFrame, closingFrame + 12], [0, 1], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
   });

@@ -11,9 +11,9 @@ loadInter();
 const FPS = 30;
 
 const STATS = [
-  {text: '43% of seniors\nreport feeling lonely', from: 1 * FPS, to: 8 * FPS},
-  {text: 'Over 8 million\nlive completely alone', from: 8 * FPS, to: 15 * FPS},
-  {text: 'For their families...\nthere\'s the worry.', from: 15 * FPS, to: 22 * FPS},
+  {text: '43% of seniors\nreport feeling lonely', from: 0.5 * FPS, to: 6.5 * FPS},
+  {text: 'Over 8 million\nlive completely alone', from: 7 * FPS, to: 13 * FPS},
+  {text: 'For their families...\nthere\'s the worry.', from: 13.5 * FPS, to: 20 * FPS},
 ];
 
 const ORBS = [
@@ -47,7 +47,7 @@ export const ProblemScene: React.FC = () => {
       />
 
       {STATS.map((stat, i) => {
-        const fadeIn = interpolate(frame, [stat.from, stat.from + 20], [0, 1], {
+        const fadeIn = interpolate(frame, [stat.from, stat.from + 12], [0, 1], {
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp',
         });
@@ -56,7 +56,7 @@ export const ProblemScene: React.FC = () => {
           extrapolateRight: 'clamp',
         });
         const opacity = Math.min(fadeIn, fadeOut);
-        const translateY = interpolate(frame, [stat.from, stat.from + 20], [20, 0], {
+        const translateY = interpolate(frame, [stat.from, stat.from + 12], [20, 0], {
           extrapolateLeft: 'clamp',
           extrapolateRight: 'clamp',
         });
@@ -91,7 +91,7 @@ export const ProblemScene: React.FC = () => {
           position: 'absolute',
           inset: 0,
           backgroundColor: theme.colors.bgDark,
-          opacity: interpolate(frame, [23 * FPS, 25 * FPS], [0, 1], {
+          opacity: interpolate(frame, [22 * FPS, 24 * FPS], [0, 1], {
             extrapolateLeft: 'clamp',
             extrapolateRight: 'clamp',
           }),

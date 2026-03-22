@@ -15,7 +15,7 @@ export const ChatBubble: React.FC<ChatBubbleProps> = ({
   text,
   enterFrame,
   avatarSrc,
-  typingDurationFrames = 20,
+  typingDurationFrames = 12,
 }) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
