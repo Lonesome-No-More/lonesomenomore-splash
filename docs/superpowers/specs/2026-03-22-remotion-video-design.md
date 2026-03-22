@@ -18,6 +18,7 @@ The Remotion project lives inside this repo at `/video`:
 video/
 ├── package.json
 ├── tsconfig.json
+├── remotion.config.ts            # Remotion config — registers src/Root.tsx as entry point
 ├── .env                          # ElevenLabs API key (gitignored)
 ├── .env.example
 ├── scripts/
@@ -144,9 +145,12 @@ Speech bubbles with:
 
 ### Scene Transitions
 - 30-frame (1s) cross-fade between scenes
+- Each scene extends 15 frames past its nominal end; the next scene begins 15 frames early, creating a 30-frame overlap window where both render simultaneously
 - Outgoing scene fades opacity 1→0 while shifting 10px upward
 - Incoming scene fades opacity 0→1 while shifting from 10px below
 - Orbs transition independently with slower timing for depth
+
+**Note:** `backdrop-filter: blur()` renders correctly with Remotion's default Chromium-based renderer. Avoid switching to alternative renderers as glass effects may not render.
 
 ## Brand Theme
 
@@ -202,6 +206,41 @@ Google Fonts loaded via `@remotion/google-fonts` package.
       "voice": "sophie",
       "text": "Good morning, Maggie! Did Emma ever get the hang of that bicycle?",
       "start_seconds": 40
+    },
+    {
+      "id": "act2-narration-2",
+      "scene": "solution",
+      "voice": "narrator",
+      "text": "No apps. No tablets. No learning curve. Just pick up the phone.",
+      "start_seconds": 46
+    },
+    {
+      "id": "act3-narration-1",
+      "scene": "experience",
+      "voice": "narrator",
+      "text": "Sophie remembers everything — the grandkids' names, the Chopin pieces, even the legendary dumplings. Every conversation picks up right where the last one left off.",
+      "start_seconds": 55
+    },
+    {
+      "id": "act3-sophie",
+      "scene": "experience",
+      "voice": "sophie",
+      "text": "You mentioned you were trying that new mystery novel. How's the detective — still one step behind?",
+      "start_seconds": 68
+    },
+    {
+      "id": "act3-narration-2",
+      "scene": "experience",
+      "voice": "narrator",
+      "text": "Available twenty-four seven. Your loved one is never alone.",
+      "start_seconds": 76
+    },
+    {
+      "id": "act4-narration",
+      "scene": "peaceofmind",
+      "voice": "narrator",
+      "text": "And for you? A weekly summary of how they're doing. The stories they shared. The moments that mattered. Lonesome No More — companionship for your loved ones. Peace of mind for you.",
+      "start_seconds": 85
     }
   ]
 }
@@ -234,7 +273,7 @@ npx remotion studio
 npx tsx scripts/generate-audio.ts
 
 # Render final video
-npx remotion render src/Root.tsx Video out/lonesome-no-more.mp4
+npx remotion render Video --output out/lonesome-no-more.mp4
 ```
 
 Remotion Studio provides a browser-based player at localhost:3000 where you can:
