@@ -284,6 +284,182 @@
             animation: fadeInUp 0.8s ease-out 0.4s backwards;
         }
 
+        /* Hero CTA Buttons */
+        .hero-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: linear-gradient(135deg, var(--secondary-color), #C8654F);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: var(--radius-md);
+            box-shadow: 0 4px 16px rgba(212, 115, 94, 0.3);
+            transition: all var(--transition-base);
+            animation: fadeInUp 0.8s ease-out 0.6s backwards;
+        }
+
+        .hero-cta-primary:hover {
+            background: linear-gradient(135deg, #C8654F, var(--secondary-color));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(212, 115, 94, 0.4);
+        }
+
+        .hero-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 36px;
+            background: transparent;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border-radius: var(--radius-md);
+            border: 2px solid rgba(95, 122, 97, 0.25);
+            transition: all var(--transition-base);
+            animation: fadeInUp 0.8s ease-out 0.7s backwards;
+        }
+
+        .hero-cta-secondary:hover {
+            background: rgba(95, 122, 97, 0.06);
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(95, 122, 97, 0.12);
+        }
+
+        /* Sticky Navigation */
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9998;
+            background: rgba(251, 248, 243, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(95, 122, 97, 0.08);
+            padding: 12px 0;
+            transform: translateY(-100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
+        }
+
+        .site-nav.visible {
+            transform: translateY(0);
+            box-shadow: 0 2px 20px rgba(95, 122, 97, 0.08);
+        }
+
+        .site-nav .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-family: 'Merriweather', serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-logo img {
+            width: 36px;
+            height: 36px;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-size: 0.92rem;
+            font-weight: 500;
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: width var(--transition-base);
+            border-radius: 1px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            padding: 8px 20px !important;
+            background: var(--secondary-color) !important;
+            color: white !important;
+            border-radius: var(--radius-sm) !important;
+            font-weight: 600 !important;
+            transition: all var(--transition-base) !important;
+        }
+
+        .nav-cta:hover {
+            background: #C8654F !important;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(212, 115, 94, 0.25);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 16px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+            .nav-hide-mobile {
+                display: none;
+            }
+        }
+
+        /* Section divider wave */
+        .section-wave {
+            position: relative;
+        }
+
+        .section-wave::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--bg-cream);
+            clip-path: ellipse(55% 100% at 50% 0%);
+            z-index: 1;
+        }
+
         /* Main Content Sections */
         section {
             padding: var(--space-3xl) var(--space-md);
@@ -517,6 +693,11 @@
             margin-bottom: var(--space-xl);
         }
 
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         .beta-icon {
             text-align: center;
             font-size: 3.5rem;
@@ -721,85 +902,6 @@
             font-size: 0.95rem;
             line-height: 1.6;
             margin: 0;
-        }
-
-        /* Demo Section */
-        .demo {
-            background: linear-gradient(135deg, rgba(95, 122, 97, 0.04) 0%, rgba(232, 170, 107, 0.04) 100%);
-            border-top: 1px solid rgba(95, 122, 97, 0.1);
-            border-bottom: 1px solid rgba(95, 122, 97, 0.1);
-            position: relative;
-        }
-
-        .demo-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .demo-icon {
-            font-size: 4.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 30px;
-            animation: pulse 2s ease-in-out infinite;
-            filter: drop-shadow(0 4px 12px rgba(212, 115, 94, 0.3));
-            position: relative;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                transform: scale(1);
-                filter: drop-shadow(0 4px 12px rgba(212, 115, 94, 0.3));
-            }
-            50% {
-                transform: scale(1.05);
-                filter: drop-shadow(0 8px 20px rgba(212, 115, 94, 0.4));
-            }
-        }
-
-        .demo-title {
-            font-family: 'Merriweather', serif;
-            font-size: 2.6rem;
-            color: var(--primary-color);
-            margin-bottom: 24px;
-            font-weight: 700;
-            line-height: 1.3;
-        }
-
-        .demo-description {
-            font-size: 1.25rem;
-            color: var(--text-medium);
-            line-height: 1.75;
-            margin-bottom: 0;
-        }
-
-        .demo-description a {
-            transition: all var(--transition-base);
-            position: relative;
-            display: inline-block;
-        }
-
-        .demo-description a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--secondary-color), var(--accent-color));
-            opacity: 0.5;
-            transition: all var(--transition-base);
-        }
-
-        .demo-description a:hover {
-            color: var(--secondary-color);
-            transform: translateY(-1px);
-        }
-
-        .demo-description a:hover::after {
-            opacity: 1;
-            height: 4px;
-            box-shadow: 0 2px 8px rgba(212, 115, 94, 0.3);
         }
 
         .coming-soon-badge {
@@ -1117,90 +1219,6 @@
             }
         }
 
-        /* Testimonials Section */
-        .testimonials {
-            background: var(--bg-light);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 35px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 980px) {
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-                max-width: 600px;
-            }
-        }
-
-        .testimonial-card {
-            background: var(--bg-light);
-            padding: var(--space-xl) var(--space-lg);
-            border-radius: var(--radius-lg);
-            border: 1px solid rgba(95, 122, 97, 0.08);
-            box-shadow: var(--shadow-sm);
-            transition: all var(--transition-base);
-            position: relative;
-        }
-
-        .testimonial-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--secondary-color), var(--accent-color));
-            border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-            transform: scaleY(0);
-            transform-origin: top;
-            transition: transform var(--transition-base);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .testimonial-card:hover::before {
-            transform: scaleY(1);
-        }
-
-        .testimonial-quote {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            opacity: 0.3;
-            margin-bottom: 15px;
-        }
-
-        .testimonial-text {
-            color: var(--text-dark);
-            font-size: 1.08rem;
-            line-height: 1.75;
-            margin-bottom: 25px;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .testimonial-author strong {
-            color: var(--text-dark);
-            font-size: 1.1rem;
-        }
-
-        .testimonial-author span {
-            color: var(--text-medium);
-            font-size: 0.95rem;
-        }
-
         /* Contact Section */
         .contact {
             background: linear-gradient(135deg, var(--primary-color) 0%, #4D6350 100%);
@@ -1423,16 +1441,75 @@
             margin-bottom: var(--space-xs);
         }
 
+        /* Trust bar */
+        .trust-bar {
+            text-align: center;
+            padding: var(--space-xl) var(--space-md);
+            background: transparent;
+        }
+
+        .trust-items {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-medium);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .trust-item i {
+            color: var(--primary-color);
+            font-size: 1.15rem;
+        }
+
+        @media (max-width: 600px) {
+            .trust-items {
+                gap: 20px;
+            }
+            .trust-item {
+                font-size: 0.88rem;
+            }
+        }
+
         /* Footer */
         footer {
             text-align: center;
-            padding: 50px 20px;
+            padding: 50px 20px 40px;
             color: var(--text-medium);
             font-size: 0.98rem;
+            border-top: 1px solid rgba(95, 122, 97, 0.08);
         }
 
         footer p {
             margin-bottom: 12px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .footer-links a {
+            color: var(--text-medium);
+            text-decoration: none;
+            font-size: 0.92rem;
+            transition: color var(--transition-fast);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
         }
 
         .powered-by {
@@ -1477,23 +1554,6 @@
                 padding: var(--space-2xl) var(--space-md);
             }
 
-            .demo-icon {
-                font-size: 3rem;
-            }
-
-            .demo-title {
-                font-size: 2rem;
-            }
-
-            .demo-description {
-                font-size: 1.1rem;
-            }
-
-            .coming-soon-badge {
-                font-size: 1rem;
-                padding: var(--space-xs) var(--space-lg);
-            }
-
             .families-content {
                 padding: var(--space-xl) var(--space-lg);
             }
@@ -1510,8 +1570,7 @@
             .step-card,
             .benefit-card,
             .availability-option,
-            .use-case-card,
-            .testimonial-card {
+            .use-case-card {
                 padding: var(--space-lg) var(--space-md);
             }
 
@@ -1634,20 +1693,26 @@
             }
         }
 
-        /* Profile image hover effect */
-        .profile-image {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .profile-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 32px rgba(95, 122, 97, 0.35) !important;
-        }
     </style>
 </head>
 <body>
     <!-- Scroll Progress Indicator -->
     <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Sticky Navigation -->
+    <nav class="site-nav" id="siteNav">
+        <div class="container">
+            <a href="#" class="nav-logo">
+                <img src="logo.png" alt="LNM"> Lonesome No More
+            </a>
+            <ul class="nav-links">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li class="nav-hide-mobile"><a href="#benefits">Benefits</a></li>
+                <li class="nav-hide-mobile"><a href="#faq">FAQ</a></li>
+                <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
     <header class="hero">
@@ -1658,9 +1723,14 @@
             </h1>
             <p class="tagline">Companionship for your loved ones, peace of mind for you</p>
             <p class="subheading">AI-powered conversations that keep your loved ones connected and families informed</p>
-            <a href="/demo" style="display: inline-flex; align-items: center; gap: 10px; margin-top: 28px; padding: 16px 36px; background: var(--secondary-color); color: white; text-decoration: none; font-weight: 600; font-size: 1.1rem; border-radius: var(--radius-md); box-shadow: 0 4px 16px rgba(212, 115, 94, 0.3); transition: all var(--transition-base);" onmouseover="this.style.background='#c4634f'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(212,115,94,0.4)'" onmouseout="this.style.background='#D4735E'; this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 16px rgba(212,115,94,0.3)'">
-                <i class="fas fa-play-circle"></i> Watch the Demo
-            </a>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-top: 32px;">
+                <a href="/demo" class="hero-cta-primary">
+                    <i class="fas fa-play-circle"></i> Watch the Demo
+                </a>
+                <a href="#contact" class="hero-cta-secondary">
+                    <i class="fas fa-envelope"></i> Get in Touch
+                </a>
+            </div>
         </div>
     </header>
 
@@ -1677,8 +1747,18 @@
         </div>
     </section>
 
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="trust-items">
+            <div class="trust-item"><i class="fas fa-phone-alt"></i> Simple phone calls</div>
+            <div class="trust-item"><i class="fas fa-shield-alt"></i> Private & secure</div>
+            <div class="trust-item"><i class="fas fa-clock"></i> Available 24/7</div>
+            <div class="trust-item"><i class="fas fa-heart"></i> Family-owned</div>
+        </div>
+    </div>
+
     <!-- How It Works Section -->
-    <section class="how-it-works">
+    <section class="how-it-works" id="how-it-works">
         <div class="container">
             <h2 class="section-title">How It Works</h2>
             <div class="steps-grid">
@@ -1707,129 +1787,8 @@
         </div>
     </section>
 
-    <!-- Demo Section -->
-    <section class="demo">
-        <div class="container">
-            <div class="demo-content">
-                <div style="text-align: center; margin-bottom: 24px;">
-                    <img src="sophie.jpg" alt="Sophie" class="profile-image" style="width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 6px solid var(--primary-color); box-shadow: 0 8px 24px rgba(95, 122, 97, 0.25);">
-                    <div style="margin-top: 16px; font-family: 'Merriweather', serif; font-size: 1.3rem; font-weight: 600; color: var(--primary-color);">Sophie</div>
-                    <div style="font-size: 0.95rem; color: var(--text-medium); font-style: italic;">AI Companion</div>
-                </div>
-                <!-- OPTION 1: "You're Maggie" with highlighted box (CURRENTLY ACTIVE) -->
-                <h2 class="demo-title">Experience a Personalized Call</h2>
-                <div style="max-width: 600px; margin: 0 auto 40px;">
-                    <p class="demo-description" style="margin-bottom: 24px;">
-                        For this demo, you're Maggie—an 82-year-old who loves mysteries and plays piano. Sophie, your AI companion is waiting for your call.
-                    </p>
-                    <div style="background: linear-gradient(135deg, rgba(232, 170, 107, 0.08) 0%, rgba(95, 122, 97, 0.08) 100%); border-radius: 12px; padding: 24px; margin-bottom: 40px; border-left: 4px solid var(--secondary-color);">
-                        <p style="color: var(--text-dark); font-size: 0.95rem; line-height: 1.7; margin: 0;">
-                            <strong style="color: var(--primary-color);">What makes it personal:</strong> Sophie already knows you have four grandchildren, your dumplings are legendary, you love Chopin, and you spotted a cardinal last week. She remembers what matters to you.
-                        </p>
-                    </div>
-                    <p style="text-align: center; margin-bottom: 40px;">
-                        <a href="tel:+13158886838" style="display: inline-flex; align-items: center; gap: 10px; background: var(--secondary-color); color: white; padding: 16px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.15rem; transition: all 0.2s ease;" onmouseover="this.style.background='#C8654F'; this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(212, 115, 94, 0.2)'" onmouseout="this.style.background='var(--secondary-color)'; this.style.transform='translateY(0)'; this.style.boxShadow='none'">
-                            <i class="fas fa-phone"></i>
-                            Call (315) 888-6838
-                        </a>
-                    </p>
-                </div>
-
-                <!-- OPTION 2: Simple clean paragraphs -->
-                <!--
-                <h2 class="demo-title">Try a Demo Conversation</h2>
-                <div style="max-width: 600px; margin: 0 auto 40px;">
-                    <p class="demo-description" style="margin-bottom: 20px;">
-                        Meet Maggie, an 82-year-old retired librarian who loves mysteries and plays piano. Sophie, her AI companion, knows all about her four grandchildren, her famous dumplings, her love of Chopin, and the cardinal she spotted last week.
-                    </p>
-                    <p class="demo-description" style="margin-bottom: 32px;">
-                        Call <a href="tel:+13158886838" style="color: var(--primary-color); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--secondary-color); padding-bottom: 2px;">(315) 888-6838</a> or use the widget below to experience the conversation as Maggie would.
-                    </p>
-                </div>
-                -->
-
-                <!-- OPTION 3: With profile card -->
-                <!--
-                <h2 class="demo-title">Try a Demo Conversation</h2>
-                <div style="max-width: 650px; margin: 0 auto 32px; display: grid; grid-template-columns: 120px 1fr; gap: 20px; align-items: center;">
-                    <div style="background: rgba(232, 170, 107, 0.12); border: 2px solid rgba(232, 170, 107, 0.3); border-radius: 12px; padding: 18px; text-align: center; color: var(--text-dark);">
-                        <i class="fas fa-user" style="font-size: 2.2rem; margin-bottom: 6px; color: var(--secondary-color);"></i>
-                        <div style="font-family: 'Merriweather', serif; font-weight: 600; font-size: 1rem;">Maggie</div>
-                        <div style="font-size: 0.8rem; color: var(--text-medium); margin-top: 2px;">Age 82</div>
-                    </div>
-                    <div>
-                        <p style="color: var(--text-medium); font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
-                            Retired librarian • Loves mysteries & piano • Four grandchildren
-                        </p>
-                        <p style="color: var(--text-medium); font-size: 0.88rem; line-height: 1.5; font-style: italic; opacity: 0.9;">
-                            Sophie knows about Maggie's famous dumplings, her love of Chopin, and the cardinal she spotted last week.
-                        </p>
-                    </div>
-                </div>
-                <p class="demo-description" style="margin-bottom: 32px;">
-                    Experience the conversation as Maggie would—use the widget below or call <a href="tel:+13158886838" style="color: var(--primary-color); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--secondary-color); padding-bottom: 2px;">(315) 888-6838</a>
-                </p>
-                -->
-
-                <!-- OPTION 4: Centered with emoji -->
-                <!--
-                <h2 class="demo-title">Try a Demo Conversation</h2>
-                <div style="max-width: 600px; margin: 0 auto 40px; background: rgba(95, 122, 97, 0.05); border-radius: 12px; padding: 32px;">
-                    <div style="text-align: center; margin-bottom: 24px;">
-                        <div style="font-size: 2rem; margin-bottom: 12px;">💬</div>
-                        <h3 style="font-family: 'Merriweather', serif; font-size: 1.2rem; color: var(--text-dark); margin-bottom: 8px;">
-                            Sophie calls Maggie
-                        </h3>
-                    </div>
-                    <p style="color: var(--text-medium); font-size: 0.95rem; line-height: 1.6; text-align: center; margin-bottom: 24px;">
-                        Maggie is an 82-year-old retired librarian who loves mysteries and piano. Sophie knows all about her four grandchildren, her famous dumplings, and the cardinal she spotted last week.
-                    </p>
-                    <p style="text-align: center; color: var(--text-medium); font-size: 0.9rem; font-style: italic;">
-                        Use the widget below or call <a href="tel:+13158886838" style="color: var(--primary-color); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--secondary-color);">(315) 888-6838</a> to experience it yourself
-                    </p>
-                </div>
-                -->
-                <!--
-                <div style="max-width: 600px; margin: 0 auto 40px;">
-                    <div style="border-left: 4px solid var(--secondary-color); padding-left: 24px; margin-bottom: 24px;">
-                        <p style="font-family: 'Merriweather', serif; font-size: 1.15rem; color: var(--text-dark); line-height: 1.7; margin-bottom: 12px; font-style: italic;">
-                            "In this demo, Sophie is calling Maggie—an 82-year-old retired librarian who loves mysteries, plays piano, and lights up when talking about her grandchildren."
-                        </p>
-                        <p style="color: var(--text-medium); font-size: 0.95rem; line-height: 1.6;">
-                            Sophie knows all about Maggie's love of Chopin, her famous dumplings, and the cardinal she spotted last week. Experience how personalized companionship feels.
-                        </p>
-                    </div>
-                </div>
-                <p class="demo-description" style="margin-bottom: 32px;">
-                    Use the widget below or call <a href="tel:+13158886838" style="color: var(--primary-color); font-weight: 700; text-decoration: none; border-bottom: 2px solid var(--secondary-color); padding-bottom: 2px;">(315) 888-6838</a> to chat with Sophie!
-                </p>
-                -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Get In Touch Section -->
-    <section class="beta-program">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <p style="text-align: center; color: var(--text-medium); font-size: 1.1rem; max-width: 600px; margin: 0 auto 40px; line-height: 1.7;">
-                Want to learn more about how Lonesome No More can help your family? Reach out — we'd love to hear from you.
-            </p>
-            <div style="display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;">
-                <a href="mailto:hello@lonesomenomore.com" style="display: flex; align-items: center; gap: 12px; padding: 20px 32px; background: var(--bg-light); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); text-decoration: none; color: var(--text-dark); font-size: 1.1rem; font-weight: 500; transition: all var(--transition-base);">
-                    <i class="fas fa-envelope" style="color: var(--primary-color); font-size: 1.3rem;"></i>
-                    hello@lonesomenomore.com
-                </a>
-                <a href="tel:+18338174646" style="display: flex; align-items: center; gap: 12px; padding: 20px 32px; background: var(--bg-light); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); text-decoration: none; color: var(--text-dark); font-size: 1.1rem; font-weight: 500; transition: all var(--transition-base);">
-                    <i class="fas fa-phone-alt" style="color: var(--primary-color); font-size: 1.3rem;"></i>
-                    (833) 817-4646
-                </a>
-            </div>
-        </div>
-    </section>
-
     <!-- Benefits Section -->
-    <section class="benefits">
+    <section class="benefits" id="benefits">
         <div class="container">
             <h2 class="section-title">Why Lonesome No More?</h2>
             <div class="benefits-grid">
@@ -1876,10 +1835,7 @@
     <!-- Sample Report Section -->
     <section class="sample-report">
         <div class="container">
-            <h2 class="section-title">
-                Weekly Conversation Summary
-                <span class="coming-soon-badge" style="display: inline-block; font-size: 0.5em; vertical-align: middle; margin-left: 16px; background: var(--accent-color); padding: 8px 20px; border-radius: 20px; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px;">Coming Soon</span>
-            </h2>
+            <h2 class="section-title">Weekly Conversation Summary</h2>
             <p style="text-align: center; max-width: 700px; margin: 0 auto 30px; font-size: 1.15rem; color: var(--text-medium);">
                 Every week, receive a thoughtful summary of your loved one's conversations, helping you stay connected to their daily life.
             </p>
@@ -1946,53 +1902,8 @@
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials">
-        <div class="container">
-            <h2 class="section-title">What Families Are Saying</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "Since Mom started using Lonesome No More, she's so much happier. She talks about her conversations with Sophie like she's a real friend. And the weekly summaries help me stay connected even though I live 2,000 miles away."
-                    </p>
-                    <div class="testimonial-author">
-                        <strong>Sarah M.</strong>
-                        <span>Daughter & Long-Distance Caregiver</span>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "We introduced LNM to our assisted living facility and the residents love it. It's like having a companion available 24/7. Families appreciate the conversation insights, and we've seen improved mood across the board."
-                    </p>
-                    <div class="testimonial-author">
-                        <strong>David T.</strong>
-                        <span>Activities Director, Sunrise Senior Living</span>
-                    </div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="testimonial-quote">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <p class="testimonial-text">
-                        "Dad was skeptical at first, but now he looks forward to his daily chats. The AI remembers his stories and asks thoughtful follow-up questions. It's honestly amazing how natural it feels."
-                    </p>
-                    <div class="testimonial-author">
-                        <strong>Jennifer L.</strong>
-                        <span>Daughter & Primary Caregiver</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- FAQ Section -->
-    <section class="faq">
+    <section class="faq" id="faq">
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <div class="faq-container">
@@ -2042,7 +1953,7 @@
                         <i class="fas fa-chevron-down faq-icon"></i>
                     </button>
                     <div class="faq-answer">
-                        <p>Our AI uses state-of-the-art voice technology, making conversations sound remarkably natural and warm. The AI companion remembers details from previous calls, asks follow-up questions, and responds appropriately to emotion and context. Try our demo above to experience it yourself - most people are amazed by how genuine it feels!</p>
+                        <p>Our AI uses state-of-the-art voice technology, making conversations sound remarkably natural and warm. The AI companion remembers details from previous calls, asks follow-up questions, and responds appropriately to emotion and context. <a href="/demo" style="color: var(--primary-color); text-decoration: underline;">Watch our demo video</a> to hear it for yourself - most people are amazed by how genuine it feels!</p>
                     </div>
                 </div>
 
@@ -2080,7 +1991,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="contact">
+    <section class="contact" id="contact">
         <div class="container">
             <h2 class="section-title">Interested in Learning More?</h2>
             <p class="contact-intro">
@@ -2104,9 +2015,13 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; 2025 Lonesome No More. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="mailto:hello@lonesomenomore.com">hello@lonesomenomore.com</a>
+                <a href="tel:+18338174646">(833) 817-4646</a>
+            </div>
+            <p>&copy; 2026 Lonesome No More. All rights reserved.</p>
             <p class="powered-by">
-                A family-owned labor of <span style="color: #D4735E;">❤️</span> • Built in Buffalo, NY
+                A family-owned labor of love &bull; Built in Buffalo, NY
             </p>
         </div>
     </footer>
@@ -2180,7 +2095,7 @@
 
         // Observe all cards for stagger animation
         setTimeout(() => {
-            document.querySelectorAll('.step-card, .benefit-card, .use-case-card, .availability-option, .testimonial-card').forEach(card => {
+            document.querySelectorAll('.step-card, .benefit-card, .use-case-card, .availability-option').forEach(card => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px) scale(0.95)';
                 card.style.transition = 'opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
@@ -2188,12 +2103,20 @@
             });
         }, 100);
 
-        // Scroll Progress Indicator
+        // Scroll Progress Indicator & Sticky Nav
+        const siteNav = document.getElementById('siteNav');
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             const scrolled = (winScroll / height) * 100;
             document.getElementById('scrollProgress').style.width = scrolled + '%';
+
+            // Show/hide sticky nav after scrolling past hero
+            if (winScroll > 400) {
+                siteNav.classList.add('visible');
+            } else {
+                siteNav.classList.remove('visible');
+            }
         });
 
         // FAQ Accordion
@@ -2243,7 +2166,5 @@
         }
     </script>
 
-    <!-- ElevenLabs ConvAI Widget -->
-    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 </body>
 </html>
