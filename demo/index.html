@@ -155,10 +155,11 @@
             z-index: 1;
         }
 
-        .video-frame video {
+        .video-frame iframe {
             display: block;
             width: 100%;
-            height: auto;
+            aspect-ratio: 16 / 9;
+            border: none;
             border-radius: var(--radius-xl);
             background: #1a1a1a;
         }
@@ -242,7 +243,7 @@
                 border-radius: var(--radius-lg);
             }
 
-            .video-frame video {
+            .video-frame iframe {
                 border-radius: var(--radius-lg);
             }
 
@@ -277,15 +278,12 @@
 
         <div class="video-container">
             <div class="video-frame">
-                <video
-                    controls
-                    playsinline
-                    preload="metadata"
-                    poster=""
-                >
-                    <source src="../demo1.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
+                <iframe
+                    src="https://www.youtube.com/embed/Jq0kt2mvDtE"
+                    title="Lonesome No More Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
             </div>
         </div>
 
